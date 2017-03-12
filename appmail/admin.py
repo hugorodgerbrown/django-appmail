@@ -35,6 +35,8 @@ class EmailTemplateAdmin(ModelAdmin):
         return "<iframe src='{}'></iframe>".format(url)
 
     def _url(self, obj, format):
+        if obj.id is None:
+            return ''
         url = reverse(
             'appmail:render_template_body',
             kwargs={'template_id': obj.id}
